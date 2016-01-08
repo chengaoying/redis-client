@@ -56,7 +56,7 @@ public class RedisStringTypeCommandTest extends TestCase {
 		vals.add("val4");
 		command.mset(keys, vals);*/
 		
-		while(true){
+		//while(true){
 			/*ArrayList<String> keys = new ArrayList<String>();
 			keys.add("key3");
 			keys.add("key4");
@@ -71,7 +71,7 @@ public class RedisStringTypeCommandTest extends TestCase {
                 System.out.println(": Cannot connect to Redis");
             } finally {
             }
-		}
+		//}
 		
 		
 		//7.command.incr("age");
