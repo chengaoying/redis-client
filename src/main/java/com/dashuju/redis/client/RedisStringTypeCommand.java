@@ -24,7 +24,7 @@ public class RedisStringTypeCommand extends AbstractRedisClientCommand{
      * @return 成功返回"OK",插入失败返回NULL 
      */
 	public String set(final String key, String value){
-		ShardedJedis jedis = shardedJedisSentinelPool.getResource();
+		ShardedJedis jedis = this.getJedisInstance();
 		String result = jedis.set(key, value);
 		jedis.close();
 		return result;
@@ -36,7 +36,7 @@ public class RedisStringTypeCommand extends AbstractRedisClientCommand{
      * @return 成功返回value,查询不到返回NULL 
      */
 	public String get(final String key){
-		ShardedJedis jedis = shardedJedisSentinelPool.getResource();
+		ShardedJedis jedis = this.getJedisInstance();
 		String val = jedis.get(key);
 		jedis.close();
 		return val;
@@ -72,7 +72,7 @@ public class RedisStringTypeCommand extends AbstractRedisClientCommand{
      * @return long  递增后的值
      */
     public Long incr(final String key){
-    	ShardedJedis jedis = shardedJedisSentinelPool.getResource();
+    	ShardedJedis jedis = this.getJedisInstance();
     	Long l = jedis.incr(key);
     	jedis.close();
     	return l;
@@ -85,7 +85,7 @@ public class RedisStringTypeCommand extends AbstractRedisClientCommand{
      * @return long  递增后的值
      */
     public Long incrBy(final String key, final int value){
-    	ShardedJedis jedis = shardedJedisSentinelPool.getResource();
+    	ShardedJedis jedis = this.getJedisInstance();
     	Long l = jedis.incrBy(key,value);
     	jedis.close();
     	return l;
@@ -97,7 +97,7 @@ public class RedisStringTypeCommand extends AbstractRedisClientCommand{
      * @return long  减去后的值
      */
     public Long decr(final String key){
-    	ShardedJedis jedis = shardedJedisSentinelPool.getResource();
+    	ShardedJedis jedis = this.getJedisInstance();
     	Long l = jedis.decr(key);
     	jedis.close();
     	return l;
@@ -110,7 +110,7 @@ public class RedisStringTypeCommand extends AbstractRedisClientCommand{
      * @return long  减去后的值
      */
     public Long decrBy(final String key, final int value){
-    	ShardedJedis jedis = shardedJedisSentinelPool.getResource();
+    	ShardedJedis jedis = this.getJedisInstance();
     	Long l = jedis.decrBy(key,value);
     	jedis.close();
     	return l;
@@ -118,13 +118,12 @@ public class RedisStringTypeCommand extends AbstractRedisClientCommand{
     
     /** 
      * 追加字符串
-     *  
      * @param key redis key 
      * @param value 追加的value 
      * @return 返回字符串长度 
      */
 	public Long append(final String key, String value){
-		ShardedJedis jedis = shardedJedisSentinelPool.getResource();
+		ShardedJedis jedis = this.getJedisInstance();
 		long result = jedis.append(key, value);
 		jedis.close();
 		return result;
@@ -136,7 +135,7 @@ public class RedisStringTypeCommand extends AbstractRedisClientCommand{
      * @return 返回字符串长度 
      */
 	public Long strlen(final String key){
-		ShardedJedis jedis = shardedJedisSentinelPool.getResource();
+		ShardedJedis jedis = this.getJedisInstance();
 		long result = jedis.strlen(key);
 		jedis.close();
 		return result;
@@ -150,7 +149,7 @@ public class RedisStringTypeCommand extends AbstractRedisClientCommand{
      * @return 返回子字符串
      */
 	public String substr(final String key, final int start, final int end){
-		ShardedJedis jedis = shardedJedisSentinelPool.getResource();
+		ShardedJedis jedis = this.getJedisInstance();
 		String val = jedis.substr(key, start, end);
 		jedis.close();
 		return val;
@@ -163,7 +162,7 @@ public class RedisStringTypeCommand extends AbstractRedisClientCommand{
      * @return 成功返回"OK",插入失败返回NULL 
      */  
     public String setByte(final String key, final byte[] value){
-    	ShardedJedis jedis = shardedJedisSentinelPool.getResource();
+    	ShardedJedis jedis = this.getJedisInstance();
     	String result = jedis.set(key.getBytes(), value);
     	jedis.close();
     	return result;
@@ -176,7 +175,7 @@ public class RedisStringTypeCommand extends AbstractRedisClientCommand{
      * @return 成功返回value,查询不到返回NULL 
      */  
     public byte[] getByte(final String key){
-    	ShardedJedis jedis = shardedJedisSentinelPool.getResource();
+    	ShardedJedis jedis = this.getJedisInstance();
     	byte[] value = jedis.get(key.getBytes());
     	jedis.close();
     	return value;
