@@ -7,7 +7,7 @@ import com.dashuju.redis.client.util.SerializeUtil;
 import redis.clients.jedis.ShardedJedis;
 
 /**
- * reids中 String类型数据操作常用命令
+ * String类型数据操作常用命令
  * @author CGY
  * @date 2015-1-7
  */
@@ -122,7 +122,7 @@ public class RedisStringTypeCommand extends AbstractRedisClientCommand{
      * @param value 追加的value 
      * @return 返回字符串长度 
      */
-	public Long append(final String key, String value){
+	public Long append(final String key, final String value){
 		ShardedJedis jedis = this.getJedisInstance();
 		long result = jedis.append(key, value);
 		jedis.close();
