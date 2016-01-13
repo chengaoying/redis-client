@@ -161,9 +161,9 @@ public class RedisStringTypeCommand extends AbstractRedisClientCommand{
      * @param value 插入的字节数组 value 
      * @return 成功返回"OK",插入失败返回NULL 
      */  
-    public String setByte(final String key, final byte[] value){
+    public String setByte(final byte[] key, final byte[] value){
     	ShardedJedis jedis = this.getJedisInstance();
-    	String result = jedis.set(key.getBytes(), value);
+    	String result = jedis.set(key, value);
     	jedis.close();
     	return result;
     } 
@@ -174,9 +174,9 @@ public class RedisStringTypeCommand extends AbstractRedisClientCommand{
      * @param key redis中的key 
      * @return 成功返回value,查询不到返回NULL 
      */  
-    public byte[] getByte(final String key){
+    public byte[] getByte(final byte[] key){
     	ShardedJedis jedis = this.getJedisInstance();
-    	byte[] value = jedis.get(key.getBytes());
+    	byte[] value = jedis.get(key);
     	jedis.close();
     	return value;
     } 
@@ -187,8 +187,8 @@ public class RedisStringTypeCommand extends AbstractRedisClientCommand{
      * @param object  插入的对象object
      * @return  成功返回"OK",插入失败返回NULL
      */
-    public String setObject(final String key, final Object object){
-    	return this.setByte(key, SerializeUtil.serialize(object));
+    public String setObject(final Object key, final Object object){
+    	return this.setByte(SerializeUtil.serialize(key), SerializeUtil.serialize(object));
     }
     
     /**
@@ -196,8 +196,8 @@ public class RedisStringTypeCommand extends AbstractRedisClientCommand{
      * @param key 查询的 key
      * @return object 返回插入的对象
      */
-    public Object getObject(final String key){
-    	return SerializeUtil.unserialize(this.getByte(key));
+    public Object getObject(final Object key){
+    	return SerializeUtil.unserialize(this.getByte(SerializeUtil.serialize(key)));
     }
       
 }

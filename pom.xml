@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.dashuju.redis.client</groupId>
+	<groupId>com.dashuju</groupId>
 	<artifactId>redis-client</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
@@ -13,6 +13,13 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+	
+	<distributionManagement>
+	  <repository>
+	    <id>nexus-releases</id>
+	    <url>http://192.168.1.21:8081/nexus/content/repositories/thirdparty/</url>
+	  </repository>
+	</distributionManagement>
 
 	<dependencies>
 		<dependency>

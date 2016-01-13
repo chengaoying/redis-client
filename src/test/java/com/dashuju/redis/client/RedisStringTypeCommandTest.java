@@ -45,12 +45,12 @@ public class RedisStringTypeCommandTest extends BaseCommandTest{
 	
 	@Test
 	public void setByte(){
-		command.setByte("key2", "test".getBytes());
+		command.setByte("key2".getBytes(), "test".getBytes());
 	}
 	
 	@Test
 	public void getByte(){
-		command.getByte("key2");
+		command.getByte("key2".getBytes());
 	}
 	
 	@Test
