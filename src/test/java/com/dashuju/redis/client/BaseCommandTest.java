@@ -15,12 +15,10 @@ public class BaseCommandTest {
 		GenericObjectPoolConfig config = new GenericObjectPoolConfig();
 		
 		List<String> masters = new ArrayList<String>();
-		masters.add("mymaster1");
-		masters.add("mymaster2");
+		masters.add("mymaster");
 		
 		Set<String> sentinels = new HashSet<String>();
-		sentinels.add("192.168.145.128:26379");
-		sentinels.add("192.168.145.128:26479");
+		sentinels.add("112.74.204.238:26379");
     
 		pool = new ShardedJedisSentinelPool(masters, sentinels, config, 60000);
 	}
