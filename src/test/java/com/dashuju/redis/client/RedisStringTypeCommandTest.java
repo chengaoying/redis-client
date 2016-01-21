@@ -1,6 +1,7 @@
 package com.dashuju.redis.client;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -114,15 +115,22 @@ public class RedisStringTypeCommandTest extends BaseCommandTest{
 	
 	@Test
 	public void setObject(){
-		People t = new People("jc",11);
-		command.setObject("object",t);
+		List<People> list = new ArrayList<>();
+		for(int i=0;i<5;i++){
+			People p = new People("jc"+i,i);
+			list.add(p);
+		}
+		command.setObject("object",list);
 	}
 	
 	@Test
 	public void getObject(){
-		People t = (People) command.getObject("object");
-		System.out.println(t.getName());
-		System.out.println(t.getAge());
+		@SuppressWarnings("unchecked")
+		List<People> list = (List<People>) command.getObject("object");
+		for (People people : list) {
+			System.out.println(people.getName());
+			System.out.println(people.getAge());
+		}
 	}
 	
 }
