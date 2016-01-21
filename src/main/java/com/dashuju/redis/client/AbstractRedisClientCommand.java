@@ -123,4 +123,17 @@ public abstract class AbstractRedisClientCommand{
     	jedis.close();
     	return l;
     }
+    
+    /** 
+     * 设置key的过期时间 
+     * @param key redis key 
+     * @param seconds 过期时间，单位：秒 
+     * @return 1:success, 0:failed 
+     */  
+    public Long expire(byte[] key, int seconds){
+    	ShardedJedis jedis = this.getJedisInstance();
+    	Long l = jedis.expire(key, seconds);
+    	jedis.close();
+    	return l;
+    }
 }

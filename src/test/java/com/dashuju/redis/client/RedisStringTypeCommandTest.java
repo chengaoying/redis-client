@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.dashuju.redis.client.util.SerializeUtil;
+
 public class RedisStringTypeCommandTest extends BaseCommandTest{
 	
 	RedisStringTypeCommand command;
@@ -30,7 +32,7 @@ public class RedisStringTypeCommandTest extends BaseCommandTest{
 	
 	@Test
 	public void expire(){
-		command.expire("key123", 5);
+		command.expire(SerializeUtil.serialize("object"), 50);
 	}
 
 	@Test
