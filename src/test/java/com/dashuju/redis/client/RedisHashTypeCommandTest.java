@@ -26,8 +26,21 @@ public class RedisHashTypeCommandTest extends BaseCommandTest{
 	}
 	
 	@Test
+	public void testhset() throws Exception{
+		People p = new People("jj",123);
+		command.hset(People.class, "people", p);
+	}
+	
+	@Test
 	public void testhmget() throws Exception {
 		System.out.println(command.hmget("map1","field1"));
+	}
+	
+	@Test
+	public void testhget() throws Exception {
+		People p = (People)command.hget(People.class, "people");
+		System.out.println(p.getName());
+		System.out.println(p.getAge());
 	}
 	
 	@Test

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.dashuju.redis.client.util.SerializeUtil;
+
 import redis.clients.jedis.ShardedJedis;
 
 /**
@@ -32,6 +34,20 @@ public class RedisHashTypeCommand extends AbstractRedisClientCommand{
 	}
 	
 	/** 
+     * 插入一个哈希结构的数据
+     * @param key 哈希在redis中key值 
+     * @param field 插入的hashMap中的field
+     * @param value 插入的hashMap中的value
+     * @return 成功返回插入条数
+     */
+	public Long hset(final Object key, final Object field, final Object value){
+		ShardedJedis jedis = this.getJedisInstance();
+		Long result = jedis.hset(SerializeUtil.serialize(key), SerializeUtil.serialize(field), SerializeUtil.serialize(value));
+		jedis.close();
+		return result;
+	}
+	
+	/** 
      * 查询哈希key中字段field的值
      * @param key 哈希在redis中key值 
      * @param filed 查询的字段
@@ -42,6 +58,19 @@ public class RedisHashTypeCommand extends AbstractRedisClientCommand{
 		List<String> result = jedis.hmget(key, filed);
 		jedis.close();
 		return result;
+	}
+	
+	/**
+	 * 查询哈希key中的field的值
+	 * @param key  哈希在redis中key值
+	 * @param field 查询的字段
+	 * @return object
+	 */
+	public Object hget(final Object key, final Object field){
+		ShardedJedis jedis = this.getJedisInstance();
+		byte[] result = jedis.hget(SerializeUtil.serialize(key), SerializeUtil.serialize(field));
+		jedis.close();
+		return SerializeUtil.unserialize(result);
 	}
 	
 	/** 
