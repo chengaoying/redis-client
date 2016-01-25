@@ -45,6 +45,18 @@ public abstract class AbstractRedisClientCommand{
     	jedis.close();
     	return l;
     }  
+    
+    /** 
+     * 删除key 
+     * @param key 删除的key 
+     * @return 成功则返回删除的条数，失败返回0
+     */  
+    public Long del(byte[] key){
+    	ShardedJedis jedis = this.getJedisInstance();
+    	Long l = jedis.del(key);
+    	jedis.close();
+    	return l;
+    } 
       
     /** 
      * 批量删除key 
