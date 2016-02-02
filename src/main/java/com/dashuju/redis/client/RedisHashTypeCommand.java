@@ -48,6 +48,20 @@ public class RedisHashTypeCommand extends AbstractRedisClientCommand{
 	}
 	
 	/** 
+     * 当key不存在插入一个哈希结构的数据,否则插入失败
+     * @param key 哈希在redis中key值 
+     * @param field 插入的hashMap中的field
+     * @param value 插入的hashMap中的value
+     * @return 成功返回1，失败返回0
+     */
+	public Long hsetnx(final Object key, final Object field, final Object value){
+		ShardedJedis jedis = this.getJedisInstance();
+		Long result = jedis.hsetnx(SerializeUtil.serialize(key), SerializeUtil.serialize(field), SerializeUtil.serialize(value));
+		jedis.close();
+		return result;
+	}
+	
+	/** 
      * 查询哈希key中字段field的值
      * @param key 哈希在redis中key值 
      * @param filed 查询的字段

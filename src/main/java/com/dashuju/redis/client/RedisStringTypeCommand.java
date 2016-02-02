@@ -31,6 +31,19 @@ public class RedisStringTypeCommand extends AbstractRedisClientCommand{
 	}
 	
 	/** 
+     * 当key不存在时插入String类型数据 
+     * @param key 插入的key 
+     * @param value 插入的value 
+     * @return 成功返回"1",插入失败返回"0" 
+     */
+	public Long setnx(final String key, String value){
+		ShardedJedis jedis = this.getJedisInstance();
+		Long result = jedis.setnx(key, value);
+		jedis.close();
+		return result;
+	}
+	
+	/** 
      * 获取String类型数据
      * @param key redis key 
      * @return 成功返回value,查询不到返回NULL 
