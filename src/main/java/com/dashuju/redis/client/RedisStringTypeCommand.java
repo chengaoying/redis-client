@@ -172,11 +172,11 @@ public class RedisStringTypeCommand extends AbstractRedisClientCommand{
      * 插入字节数组到Redis中 
      * @param key 插入的key 
      * @param value 插入的字节数组 value 
-     * @return 成功返回"OK",插入失败返回NULL 
+     * @return 成功返回"1",插入失败返回"0" 
      */  
-    public String setByte(final byte[] key, final byte[] value){
+    public long setByte(final byte[] key, final byte[] value){
     	ShardedJedis jedis = this.getJedisInstance();
-    	String result = jedis.set(key, value);
+    	long result = jedis.setnx(key, value);
     	jedis.close();
     	return result;
     } 
@@ -198,9 +198,9 @@ public class RedisStringTypeCommand extends AbstractRedisClientCommand{
      * 插入对象对redis中
      * @param key  插入的对象 key
      * @param object  插入的对象object
-     * @return  成功返回"OK",插入失败返回NULL
+     * @return 成功返回"1",插入失败返回"0"
      */
-    public String setObject(final Object key, final Object object){
+    public long setObject(final Object key, final Object object){
     	return this.setByte(SerializeUtil.serialize(key), SerializeUtil.serialize(object));
     }
     
